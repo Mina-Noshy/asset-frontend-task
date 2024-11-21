@@ -1,0 +1,61 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="Enter your email">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Password Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+            Password must be at least 6 characters
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Dropdown for Selecting company -->
+        <mat-form-field appearance="outline">
+          <mat-label>Select Company</mat-label>
+          <mat-select formControlName="company" placeholder="Choose an company">
+            <mat-option value="1001">
+              Asset Branch 1001
+            </mat-option>
+            <mat-option value="1002">
+              Asset Branch 1002
+            </mat-option>
+            <mat-option value="1003">
+              Asset Branch 1003
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Submit Button -->
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+          Login
+        </button>
+        <a href="/auth/register">Create an account</a>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

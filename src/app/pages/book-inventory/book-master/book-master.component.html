@@ -1,0 +1,101 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Book Masters</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <!-- Search Box -->
+      <div class="row">
+        <div class="col-md-3">
+          <input class="form-control m-2" [(ngModel)]="searchTerm"
+                 (ngModelChange)="onSearchChange()" placeholder="Search here..">
+        </div>
+        <div class="col-md-3">
+          <button class="m-2" mat-button (click)="create()">Create new</button>
+        </div>
+      </div>
+  
+      <!-- Table for displaying book masters -->
+      <div class="table-container">
+        <table mat-table [dataSource]="bookMasters">
+  
+          <!-- Id Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let bookMaster"> {{ bookMaster.id }} </td>
+          </ng-container>
+
+          <!-- Category Column -->
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let bookMaster"> {{ bookMaster.category }} </td>
+          </ng-container>
+  
+          <!-- Title Column -->
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let bookMaster"> {{ bookMaster.title }} </td>
+          </ng-container>
+
+          <!-- Author Column -->
+          <ng-container matColumnDef="author">
+            <th mat-header-cell *matHeaderCellDef> Author </th>
+            <td mat-cell *matCellDef="let bookMaster"> {{ bookMaster.author }} </td>
+          </ng-container>
+  
+          <!-- Publication Date Column -->
+          <ng-container matColumnDef="publicationDate">
+            <th mat-header-cell *matHeaderCellDef> Publication Date </th>
+            <td mat-cell *matCellDef="let bookMaster"> {{ bookMaster.publicationDate | date }} </td>
+          </ng-container>
+  
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let bookMaster"> {{ bookMaster.quantity }} </td>
+          </ng-container>
+  
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let bookMaster"> {{ bookMaster.description }} </td>
+          </ng-container>
+  
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let bookMaster">
+              <button mat-icon-button (click)="edit(bookMaster.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="delete(bookMaster.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+          <!-- Header Row -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <!-- Data Row -->
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  
+        <!-- Pagination Controls -->
+        <div class="pagination-controls">
+          <button mat-raised-button (click)="previousPage()" [disabled]="!hasPreviousPage">Previous</button>
+          <span>Page {{ pageNumber }} of {{ totalPages }}</span>
+          <button mat-raised-button (click)="nextPage()" [disabled]="!hasNextPage">Next</button>
+        </div>
+  
+        <!-- Page Size Dropdown (positioned bottom-right) -->
+        <div class="page-size-selector">
+          <mat-select [(value)]="pageSize" (selectionChange)="onPageSizeChange($event.value)">
+            <mat-option *ngFor="let size of pageSizes" [value]="size">
+              {{ size }}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

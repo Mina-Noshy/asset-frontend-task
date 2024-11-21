@@ -1,0 +1,103 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Book Transactions</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content>
+      <!-- Search Box -->
+      <div class="row">
+        <div class="col-md-3">
+          <input class="form-control m-2" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" placeholder="Search here..">
+        </div>
+        <div class="col-md-3">
+          <button class="m-2" mat-button (click)="create()">Create new</button>
+        </div>
+      </div>
+  
+      <!-- Table for displaying book transactions -->
+      <div class="table-container">
+        <table mat-table [dataSource]="bookTransactions">
+  
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.id }} </td>
+          </ng-container>
+  
+          <!-- Book Title Column -->
+          <ng-container matColumnDef="bookTitle">
+            <th mat-header-cell *matHeaderCellDef> Book Title </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.bookTitle }} </td>
+          </ng-container>
+  
+          <!-- User Name Column -->
+          <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef> User Name </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.userName }} </td>
+          </ng-container>
+  
+          <!-- Transaction Type Column -->
+          <ng-container matColumnDef="transactionType">
+            <th mat-header-cell *matHeaderCellDef> Transaction Type </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.transactionType }} </td>
+          </ng-container>
+  
+          <!-- Transaction Date Column -->
+          <ng-container matColumnDef="transactionDate">
+            <th mat-header-cell *matHeaderCellDef> Transaction Date </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.transactionDate | date }} </td>
+          </ng-container>
+  
+          <!-- Due Date Column -->
+          <ng-container matColumnDef="dueDate">
+            <th mat-header-cell *matHeaderCellDef> Due Date </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.dueDate | date }} </td>
+          </ng-container>
+  
+          <!-- Returned Date Column -->
+          <ng-container matColumnDef="returnedDate">
+            <th mat-header-cell *matHeaderCellDef> Returned Date </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.returnedDate | date }} </td>
+          </ng-container>
+  
+          <!-- Overdue Column -->
+          <ng-container matColumnDef="isOverdue">
+            <th mat-header-cell *matHeaderCellDef> Overdue </th>
+            <td mat-cell *matCellDef="let transaction"> {{ transaction.isOverdue ? 'Yes' : 'No' }} </td>
+          </ng-container>
+  
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let transaction">
+              <button mat-icon-button (click)="details(transaction.bookId)">
+                <mat-icon>details</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+          <!-- Header Row -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <!-- Data Row -->
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  
+        <!-- Pagination Controls -->
+        <div class="pagination-controls">
+          <button mat-raised-button (click)="previousPage()" [disabled]="!hasPreviousPage">Previous</button>
+          <span>Page {{ pageNumber }} of {{ totalPages }}</span>
+          <button mat-raised-button (click)="nextPage()" [disabled]="!hasNextPage">Next</button>
+        </div>
+  
+        <!-- Page Size Dropdown (positioned bottom-right) -->
+        <div class="page-size-selector">
+          <mat-select [(value)]="pageSize" (selectionChange)="onPageSizeChange($event.value)">
+            <mat-option *ngFor="let size of pageSizes" [value]="size">
+              {{ size }}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

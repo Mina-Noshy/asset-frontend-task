@@ -1,0 +1,52 @@
+/* Customize the dialog appearance */
+.custom-dialog-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .mat-dialog-content {
+    padding: 16px;
+  }
+  
+  .mat-dialog-title {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .mat-form-field {
+    width: 100%; 
+    margin-bottom: 16px;  
+  }
+  
+  .login-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  mat-card {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  mat-card-header {
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    margin-top: 16px;
+  }

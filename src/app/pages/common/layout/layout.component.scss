@@ -1,0 +1,18 @@
+.app-container {
+    height: 100%;
+  }
+  
+  .app-sidenav {
+    width: 250px;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  

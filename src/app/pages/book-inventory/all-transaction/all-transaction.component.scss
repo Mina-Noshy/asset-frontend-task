@@ -1,0 +1,35 @@
+mat-card {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+  }
+  
+  .table-container {
+    position: relative;
+  }
+  
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  mat-table {
+    width: 100%;
+  }
+  
+  .pagination-controls {
+    margin-top: 16px;
+    text-align: left;
+  }
+  
+  .pagination-controls button {
+    margin: 0 8px;
+  }
+  
+  .page-size-selector {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 100px;
+  }
+  
